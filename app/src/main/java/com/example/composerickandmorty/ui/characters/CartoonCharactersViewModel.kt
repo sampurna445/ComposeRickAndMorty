@@ -2,8 +2,8 @@ package com.example.composerickandmorty.ui.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.composerickandmorty.ui.data.model.characters.ResultModel
-import com.example.composerickandmorty.ui.data.repository.Repository
+import com.example.composerickandmorty.data.model.characters.ResultModel
+import com.example.composerickandmorty.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

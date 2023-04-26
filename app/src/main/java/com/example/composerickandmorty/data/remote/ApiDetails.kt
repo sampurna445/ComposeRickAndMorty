@@ -1,4 +1,4 @@
-package com.example.composerickandmorty.ui.data.remote
+package com.example.composerickandmorty.data.remote
 
 object ApiDetails {
     const val BASE_URL = "https://rickandmortyapi.com/api/"

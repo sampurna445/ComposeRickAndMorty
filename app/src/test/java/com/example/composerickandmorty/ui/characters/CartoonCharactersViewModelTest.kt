@@ -1,9 +1,9 @@
 package com.example.composerickandmorty.ui.characters
 
 
-import com.example.composerickandmorty.ui.data.model.characters.CharactersModel
-import com.example.composerickandmorty.ui.data.repository.FakeRepository
-import com.example.composerickandmorty.ui.data.model.characters.ResultModel
+import com.example.composerickandmorty.data.model.characters.CharactersModel
+import com.example.composerickandmorty.data.repository.FakeRepository
+import com.example.composerickandmorty.data.model.characters.ResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -41,7 +41,7 @@ class CartoonCharactersViewModelTest {
         val characters = CharactersModel()
 
 
-        // Return the mock ProductsModel object from the repository
+        // Return the mock CharctersModel object from the repository
         Mockito.`when`(fakeRepository.getCharacters()).thenReturn(characters)
 
         val viewModel = CartoonCharactersViewModel(fakeRepository)

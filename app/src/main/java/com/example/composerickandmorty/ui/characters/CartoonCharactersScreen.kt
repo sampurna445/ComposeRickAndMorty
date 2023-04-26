@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 // Main screen of the app
@@ -28,22 +29,25 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartoonCharactersScreen(
-    cartoonCharViewModel: CartoonCharactersViewModel = viewModel()
+
 ) {
+    val cartoonCharViewModel: CartoonCharactersViewModel=hiltViewModel()
+
     val cartoonChars by cartoonCharViewModel.cartoonChars.collectAsState()
 
     Scaffold(
         topBar = { Toolbar() }
     ) {
-        Box(
-            modifier = Modifier.padding(top = 64.dp)
+        Column(
+            modifier = Modifier.padding(top = 10.dp)
         ) {
+
             // Content Composables
             SearchBar()
 
 
             // Display the list of cartoon characters  in a LazyColumn
-            LazyColumn {
+            LazyColumn(){
                 items(cartoonChars){cartoonCharItem ->
                     if (cartoonCharItem != null) {
                         CartoonCharacterItem(cartoonCharItem)
@@ -95,7 +99,7 @@ fun SearchBar(
             )
         },
         placeholder = {
-            //Text(stringResource(R.string.placeholder_search))
+          // Text(stringResource(R.string.))
             Text("Search Cartoons by Name")
         },
         modifier = modifier

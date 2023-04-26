@@ -1,9 +1,9 @@
-package com.example.composerickandmorty.ui.di
+package com.example.composerickandmorty.di
 
-import com.example.composerickandmorty.ui.data.remote.ApiDetails
-import com.example.composerickandmorty.ui.data.remote.ApiRequest
-import com.example.composerickandmorty.ui.data.repository.Repository
-import com.example.composerickandmorty.ui.data.repository.RepositoryImpl
+import com.example.composerickandmorty.data.remote.ApiDetails
+import com.example.composerickandmorty.data.remote.ApiRequest
+import com.example.composerickandmorty.data.repository.Repository
+import com.example.composerickandmorty.data.repository.RepositoryImpl
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -42,12 +42,11 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        gson: Gson,
         provideOkHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ApiDetails.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
             .client(provideOkHttpClient)
             .build()
     }

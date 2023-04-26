@@ -1,8 +1,8 @@
-package com.example.composerickandmorty.ui.data.remote
+package com.example.composerickandmorty.data.remote
 
-import com.example.composerickandmorty.ui.data.model.characters.CharactersModel
-import com.example.composerickandmorty.ui.data.model.characters.ResultModel
-import com.example.composerickandmorty.ui.data.remote.ApiRequest
+import com.example.composerickandmorty.data.model.characters.CharactersModel
+import com.example.composerickandmorty.data.model.characters.ResultModel
+import com.example.composerickandmorty.data.remote.ApiRequest
 
 class FakeApiRequest : ApiRequest {
     private var mockedResponse: CharactersModel? = null

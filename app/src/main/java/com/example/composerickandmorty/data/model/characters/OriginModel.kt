@@ -1,9 +1,9 @@
-package com.example.composerickandmorty.ui.data.model.characters
+package com.example.composerickandmorty.data.model.characters
 
 
 import com.google.gson.annotations.SerializedName
 
-data class LocationModel(
+data class OriginModel(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("url")
