@@ -1,28 +1,28 @@
 package com.example.composerickandmorty.ui.characters
 
 import android.annotation.SuppressLint
+import android.widget.Toolbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
+
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
+
+import androidx.compose.foundation.lazy.itemsIndexed
+
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.stringResource
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 // Main screen of the app
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -35,26 +35,43 @@ fun CartoonCharactersScreen(
 
     val cartoonChars by cartoonCharViewModel.cartoonChars.collectAsState()
 
+
+    // Filtered product list based on search query
+    val searchQuery = remember { mutableStateOf("") }
+
+    val filteredCartoonCharsList =
+        if (searchQuery.value.isBlank()) {
+            cartoonChars
+        } else {
+            cartoonChars.filter { cartoonChar ->
+                cartoonChar?.name!!.contains(searchQuery.value, ignoreCase = true)
+            }
+        }
+
+
+
     Scaffold(
         topBar = { Toolbar() }
     ) {
         Column(
             modifier = Modifier.padding(top = 10.dp)
         ) {
+            Toolbar()
+            SearchBar(searchQuery)
 
-            // Content Composables
-            SearchBar()
+            LazyColumn(
+                modifier = Modifier
+                    .padding(top = 10.dp)
 
-
-            // Display the list of cartoon characters  in a LazyColumn
-            LazyColumn(){
-                items(cartoonChars){cartoonCharItem ->
+            ) {
+                itemsIndexed(filteredCartoonCharsList) { _, cartoonCharItem ->
                     if (cartoonCharItem != null) {
                         CartoonCharacterItem(cartoonCharItem)
                     }
                 }
 
             }
+
         }
 
 
@@ -70,7 +87,7 @@ fun Toolbar() {
             .padding(0.dp)
             .height(56.dp)
             .background(color = Color(0xffe754ac)),
-
+       horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -85,27 +102,31 @@ fun Toolbar() {
 
 }
 
+
 @Composable
 fun SearchBar(
-    modifier: Modifier = Modifier
+
+    searchQuery: MutableState<String>, modifier: Modifier = Modifier
 ) {
-    TextField(
-        value = "",
-        onValueChange = {},
+    OutlinedTextField(
+        value = searchQuery.value,
+        onValueChange = {searchQuery.value=it},
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null
             )
         },
+        colors = TextFieldDefaults.textFieldColors(
+            //MaterialTheme.colorScheme.onPrimary
+        ),
         placeholder = {
-          // Text(stringResource(R.string.))
             Text("Search Cartoons by Name")
         },
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 56.dp)
-            .background(color = Color.LightGray, shape = RectangleShape)
-
+            .padding(16.dp),
+        shape = RoundedCornerShape(16.dp),
     )
 }
