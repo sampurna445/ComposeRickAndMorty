@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+
 import coil.compose.rememberAsyncImagePainter
 import com.example.composerickandmorty.data.model.characters.ResultModel
 
@@ -261,96 +261,3 @@ fun ClickableCard(onCardClick: () -> Unit,
         }
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ExpandedCard(onExpandedCardClick: () -> Unit,
-                 onExpandedCardCollapse : () -> Unit,
-                 cartoonCharitem:ResultModel){
-   // var isExpanded by remember { mutableStateOf(false) }
-
-
-}
-/*
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ClickableCard(onCardClick: () -> Unit,
-                  onCardCollapse: () -> Unit,
-                  cartoonCharitem: ResultModel) {
-
-    var isExpanded by remember { mutableStateOf(true) }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Magenta) // Set the background color
-    ) {
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .animateContentSize()
-                .clickable {
-                    if (isExpanded) {
-
-                        LaunchedEffect(isExpanded) {
-                            isExpanded = false
-                            onCardCollapse()
-                        }
-                    } else {
-                        isExpanded = true
-                        onCardClick()
-                    }
-                },
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = if (isExpanded) 24.dp else 2.dp
-            )
-        ) {
-
-                Column(
-                    modifier = Modifier
-                        .animateContentSize()
-                        .padding(16.dp)
-                ) {
-                    AnimatedVisibility(visible = isExpanded) {
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight()
-                            .padding(vertical = 24.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically) {
-                            Image(
-                                painter = rememberAsyncImagePainter(cartoonCharitem.image),
-                                contentDescription = "",
-                                modifier = Modifier
-                                    .size(height = 180.dp, width = 90.dp)
-                                    .weight(0.5f)
-                                    .padding(5.dp)
-
-                            )
-
-                            Column(
-                                modifier = Modifier.padding(20.dp)
-                            ) {
-                                cartoonCharitem.name?.let {
-                                    Text(text = it,
-                                        color = Color.Black,
-                                        fontWeight = FontWeight.Bold,
-                                        textAlign = TextAlign.Left
-                                    )
-                                }
-                                cartoonCharitem.status?.let { Text(text = it,
-                                    color = Color.Black,
-                                    fontWeight = FontWeight.Bold
-                                ) }
-                            }
-                        }
-                    }
-                }
-            }
-
-
-    }
-}
-
-*/
